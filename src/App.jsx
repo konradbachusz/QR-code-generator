@@ -327,10 +327,14 @@ const QRCodeGenerator = () => {
           </div>
         </div>
 
-        {/* Advertisement placeholder */}
+        {/* Top Banner Ad */}
         <div className="bg-gray-100 border-t border-b border-gray-200 py-2">
-          <div className="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500">
-            Advertisement Space (970x90)
+          <div className="max-w-7xl mx-auto px-4 flex justify-center">
+            <AdSense
+              adSlot="1234567890"
+              adFormat="horizontal"
+              adResponsive={true}
+            />
           </div>
         </div>
       </header>
@@ -473,18 +477,25 @@ const QRCodeGenerator = () => {
               </div>
             )}
 
-            {/* Ad Space Placeholder */}
-            <div className="bg-gray-100 rounded-xl p-8 border border-gray-200 text-center">
-              <p className="text-sm text-gray-500">Advertisement Space (728x90)</p>
+            {/* Content Banner Ad */}
+            <div className="bg-gray-100 rounded-xl p-4 border border-gray-200 flex justify-center">
+              <AdSense
+                adSlot="0987654321"
+                adFormat="horizontal"
+                adResponsive={true}
+              />
             </div>
           </div>
 
           {/* RIGHT COLUMN - Sidebar */}
           <div className="space-y-6">
             {/* Sidebar Ad - Sticky means it stays in place while scrolling */}
-            <div className="bg-gray-100 rounded-xl p-8 border border-gray-200 text-center sticky top-4">
-              <p className="text-sm text-gray-500 mb-2">Advertisement</p>
-              <p className="text-xs text-gray-400">(300x250)</p>
+            <div className="bg-gray-100 rounded-xl p-4 border border-gray-200 flex justify-center sticky top-4">
+              <AdSense
+                adSlot="5555555555"
+                adFormat="rectangle"
+                adResponsive={true}
+              />
             </div>
 
             {/* Features List */}
