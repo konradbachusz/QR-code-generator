@@ -24,7 +24,7 @@ const QRCodeGenerator = () => {
 
   const generateQRCode = async () => {
     setError('');
-    
+
     if (!url.trim()) {
       setError('Please enter a URL');
       return;
@@ -36,39 +36,70 @@ const QRCodeGenerator = () => {
     }
 
     try {
-      // QR Code generation using a simple algorithm
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      
       // Use QRious library via CDN (it's already available)
       const script = document.createElement('script');
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js';
-      
-      script.onload = () => {
+
+      const generateQR = () => {
         const qr = new window.QRious({
           value: url,
           size: size,
           level: 'H'
         });
-        
-        setQrDataUrl(qr.toDataURL());
+
+        if (format === 'svg') {
+          // Convert canvas to SVG
+          const canvas = qr.canvas;
+          const ctx = canvas.getContext('2d');
+          const imageData = ctx.getImageData(0, 0, size, size);
+          const svg = canvasToSVG(imageData, size);
+          setQrDataUrl(svg);
+        } else {
+          // PNG format
+          setQrDataUrl(qr.toDataURL());
+        }
       };
-      
+
+      script.onload = generateQR;
+
       if (!window.QRious) {
         document.head.appendChild(script);
       } else {
-        const qr = new window.QRious({
-          value: url,
-          size: size,
-          level: 'H'
-        });
-        
-        setQrDataUrl(qr.toDataURL());
+        generateQR();
       }
     } catch (err) {
       setError('Failed to generate QR code. Please try again.');
       console.error(err);
     }
+  };
+
+  const canvasToSVG = (imageData, size) => {
+    const data = imageData.data;
+    const moduleSize = 1;
+    let svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
+  <rect width="${size}" height="${size}" fill="#ffffff"/>
+  <path d="`;
+
+    let path = '';
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
+        const idx = (y * size + x) * 4;
+        const r = data[idx];
+        const g = data[idx + 1];
+        const b = data[idx + 2];
+
+        // Check if pixel is black (QR code module)
+        if (r < 128 && g < 128 && b < 128) {
+          path += `M${x},${y}h${moduleSize}v${moduleSize}h-${moduleSize}z`;
+        }
+      }
+    }
+
+    svg += path + `" fill="#000000"/>
+</svg>`;
+
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
   };
 
   const downloadQRCode = () => {
