@@ -12,6 +12,9 @@ import React, { useState, useRef } from 'react';
 // These are pre-made icon components we can use in our UI
 import { Download, Link2, Share2, AlertCircle, Check } from 'lucide-react';
 
+// Import the AdSense component for displaying ads
+import AdSense from './AdSense';
+
 // =============================================================================
 // MAIN COMPONENT
 // =============================================================================
