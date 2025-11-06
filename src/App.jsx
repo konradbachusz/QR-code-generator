@@ -12,9 +12,6 @@ import React, { useState, useRef } from 'react';
 // These are pre-made icon components we can use in our UI
 import { Download, Link2, Share2, AlertCircle, Check } from 'lucide-react';
 
-// Import the AdSense component for displaying ads
-import AdSense from './AdSense';
-
 // =============================================================================
 // MAIN COMPONENT
 // =============================================================================
@@ -326,17 +323,6 @@ const QRCodeGenerator = () => {
             </div>
           </div>
         </div>
-
-        {/* Top Banner Ad */}
-        <div className="bg-gray-100 border-t border-b border-gray-200 py-2">
-          <div className="max-w-7xl mx-auto px-4 flex justify-center">
-            <AdSense
-              adSlot="1234567890"
-              adFormat="horizontal"
-              adResponsive={true}
-            />
-          </div>
-        </div>
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-8">
@@ -476,28 +462,10 @@ const QRCodeGenerator = () => {
                 </div>
               </div>
             )}
-
-            {/* Content Banner Ad */}
-            <div className="bg-gray-100 rounded-xl p-4 border border-gray-200 flex justify-center">
-              <AdSense
-                adSlot="0987654321"
-                adFormat="horizontal"
-                adResponsive={true}
-              />
-            </div>
           </div>
 
           {/* RIGHT COLUMN - Sidebar */}
           <div className="space-y-6">
-            {/* Sidebar Ad - Sticky means it stays in place while scrolling */}
-            <div className="bg-gray-100 rounded-xl p-4 border border-gray-200 flex justify-center sticky top-4">
-              <AdSense
-                adSlot="5555555555"
-                adFormat="rectangle"
-                adResponsive={true}
-              />
-            </div>
-
             {/* Features List */}
             <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
               <h3 className="font-semibold mb-4">Features</h3>
