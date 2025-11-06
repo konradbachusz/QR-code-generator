@@ -5,8 +5,8 @@ A modern, free QR code generator web application built with React. Generate QR c
 ## Features
 
 - Instant QR code generation for any HTTP/HTTPS URL
-- Multiple size options (128px, 256px, 512px, 1024px)
-- Download as PNG format
+- Multiple size options (128px, 256px, 512px)
+- Download as PNG or SVG format
 - Copy URL to clipboard
 - Share functionality (on supported devices)
 - Client-side generation (no data transmitted to servers)
@@ -74,6 +74,63 @@ Preview the production build locally:
 ```bash
 npm run preview
 ```
+
+## Deployment to GitHub Pages
+
+This project is configured for automatic deployment to GitHub Pages using GitHub Actions.
+
+### Live Demo
+
+Once deployed, your application will be available at:
+**https://konradbachusz.github.io/QR-code-generator/**
+
+### Automatic Deployment
+
+The project is set up with GitHub Actions for automatic deployment:
+
+1. **Enable GitHub Pages** in your repository:
+   - Go to your repository on GitHub
+   - Navigate to **Settings** → **Pages**
+   - Under **Source**, select **GitHub Actions**
+
+2. **Push to main branch**:
+   ```bash
+   git add .
+   git commit -m "Configure for GitHub Pages deployment"
+   git push origin main
+   ```
+
+3. **Monitor deployment**:
+   - Go to the **Actions** tab in your repository
+   - Watch the deployment workflow run
+   - Once complete, your site will be live!
+
+### Manual Deployment
+
+If you need to deploy manually:
+
+```bash
+# Build the project
+npm run build
+
+# The dist/ folder contains your production build
+# You can deploy this folder to any static hosting service
+```
+
+### Configuration Files
+
+The following files are configured for GitHub Pages deployment:
+
+- **`.github/workflows/deploy.yml`** - GitHub Actions workflow for automatic deployment
+- **`vite.config.js`** - Contains the base path configuration (`/QR-code-generator/`)
+- **`package.json`** - Includes deployment scripts
+
+### Important Notes
+
+- The `base` path in `vite.config.js` is set to `/QR-code-generator/` to match the repository name
+- If you fork this repo or rename it, update the `base` path in `vite.config.js` accordingly
+- The workflow triggers on every push to the `main` branch
+- Deployment typically takes 1-2 minutes to complete
 
 ## Project Structure
 
